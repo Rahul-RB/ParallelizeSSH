@@ -1,5 +1,5 @@
-from src.Targets import procTarget
-from src.Command import Command
+from Parallelize.Targets import procTarget
+from Parallelize.Command import Command
 import multiprocessing
 
 class Parallelize(object):
@@ -22,7 +22,7 @@ class Parallelize(object):
 
 		# callback in cmdCallbacks should be:
 		# function name
-	
+
 	def setup(self):
 		self._procList = [
 			multiprocessing.Process(
@@ -34,7 +34,7 @@ class Parallelize(object):
 			)
 			for host,config in self.hostConfig.items()
 		]
-	
+
 	def run(self,waitToExit=False):
 		for process in self._procList:
 			process.start()

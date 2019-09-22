@@ -1,5 +1,5 @@
-from src.Parallelize import Command
-from src.Parallelize import Parallelize
+from Parallelize.Parallelize import Command
+from Parallelize.Parallelize import Parallelize
 
 def lsCallback(stdin,stdout,stderr):
     for line in iter(lambda: stdout.readline(),""):
