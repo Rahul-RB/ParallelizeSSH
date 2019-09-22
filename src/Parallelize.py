@@ -1,5 +1,5 @@
-from Targets import procTarget
-
+from src.Targets import procTarget
+from src.Command import Command
 import multiprocessing
 
 class Parallelize(object):
