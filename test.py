@@ -1,3 +1,4 @@
+import os
 from Parallelize.Parallelize import Command
 from Parallelize.Parallelize import Parallelize
 
