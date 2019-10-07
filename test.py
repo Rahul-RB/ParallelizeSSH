@@ -1,21 +1,27 @@
 import os
+import threading
 from Parallelize.Parallelize import Command
 from Parallelize.Parallelize import Parallelize
+
+def closeConns(ssh):
+	ssh.close()
 
 def lsCallback(stdin,stdout,stderr):
     for line in iter(lambda: stdout.readline(),""):
         print(line)
 
 hosts = {
-    "192.168.247.128":{
+    "127.0.0.1":{
         "uname":os.getenv("PSSH_UNAME"),
         "passwd":os.getenv("PSSH_PASSWD"),
-        "cmds":[Command("ls -l",isThreaded=True)],
+        "cmds":[Command("./some-long-script.py",isThreaded=True)],
         "callbacks":[lsCallback]
     }
 }
 
 ssh = Parallelize(hosts)
-ssh.setup()
-ssh.run(waitToExit=True)
-
+ssh.run(waitToExit=False)
+t = threading.Timer(5,closeConns,kwargs={
+		"ssh":ssh
+	})
+t.start()
