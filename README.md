@@ -25,7 +25,6 @@ Usage:
     }
 
     ssh = Parallelize(hosts)
-    ssh.setup()
     ssh.run()
     ssh.close()
     
