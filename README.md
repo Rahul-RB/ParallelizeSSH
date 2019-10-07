@@ -1,14 +1,14 @@
 # ParallelizeSSH
 Simple Parallel SSH module using Paramiko.
 
-Dependencies:
+### Dependencies:
 - Paramiko 2.6
 - Python 3.6+
 
-Installation:
-<To be updated soon>
+### Installation:
+Coming soon on pip
 
-Get Started:
+### Get Started:
 
     import os
     from Parallelize.Parallelize import Command
@@ -28,7 +28,7 @@ Get Started:
     ssh.run(waitToExit=False)
     ssh.close()
 
-An example with custom callback:
+#### An example with custom callback:
 
     import os
     import threading
@@ -54,7 +54,7 @@ An example with custom callback:
     ssh.run(waitToExit=False)
     ssh.close()
 
-Using isThreaded for inifinitely running commands:
+#### Using isThreaded for inifinitely running commands:
 
     from Parallelize.Parallelize import Command
     from Parallelize.Parallelize import Parallelize
