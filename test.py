@@ -14,8 +14,9 @@ hosts = {
     "127.0.0.1":{
         "uname":os.getenv("PSSH_UNAME"),
         "passwd":os.getenv("PSSH_PASSWD"),
-        "cmds":[Command("./some-long-script.py",isThreaded=True)],
-        "callbacks":[lsCallback]
+        "cmds":[
+        	Command("python3 runLong.py")
+        ]
     }
 }
 

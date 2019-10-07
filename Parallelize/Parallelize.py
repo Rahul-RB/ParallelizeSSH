@@ -16,16 +16,14 @@ class Parallelize(object):
 		# 		passwd:<str>,
 		# 		sshPort:<int>,
 		# 		cmds:<tuple>,
-		# 		cmdCallbacks:<tuple>,
 		# 	}
 		# }
 
-		# cmd in cmds can be:
-		# <str> or
-		# <Command object>
+		# cmd in cmds have:
+		# 	cmd string - mandatory
+		# 	callback - optional
+		# 	isThreaded - optional
 
-		# callback in cmdCallbacks should be:
-		# function name
 
 	def setup(self):
 		self._procList = [

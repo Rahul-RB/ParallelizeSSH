@@ -7,9 +7,9 @@ logging.basicConfig(
 	datefmt="%d/%m/%Y %I:%M:%S %p"
 )
 
-def _threadTarget(ssh,cmd,callback):
+def _threadTarget(ssh,cmd):
 	stdin,stdout,stderr = ssh.exec_command(cmd.getCommand(),get_pty=True)
-	callback(
+	cmd.getCallBack()(
 		stdin = stdin,
 		stdout = stdout,
 		stderr = stderr
@@ -20,7 +20,6 @@ def procTarget(IP,config):
 	passwd = config["passwd"]
 	sshPort = config["sshPort"] if "sshPort" in config else 22
 	cmds = config["cmds"]
-	callbacks = config["callbacks"]
 	_parallelCmdList = []
 	_threadList = []
 
@@ -47,23 +46,23 @@ def procTarget(IP,config):
 	else:
 		logging.info("SSH Succeded at: {0}".format(IP))
 
-		for cmd,callback in zip(cmds,callbacks):
-			# Check if cmd is string or Command object
-			# if cmd, exec_command and call callback.
-			# if Command object:
-			# 	store for end of exec
-			if isinstance(cmd,str):
-				stdin,stdout,stderr = ssh.exec_command(cmd,get_pty=True)
-				callback(
+		for cmd in cmds:
+			# Check if cmd isThreaded
+			# if yes, append it to parallelCmdList and exec later
+			# if no, then exec it right away
+
+			if cmd.isThreaded:
+				_parallelCmdList.append(cmd)
+			else:
+				stdin,stdout,stderr = ssh.exec_command(cmd.getCommand(),get_pty=True)
+				cmd.getCallBack()(
 					stdin = stdin,
 					stdout = stdout,
 					stderr = stderr
 				)
-			else:
-				_parallelCmdList.append((cmd,callback))
 
-		for cmd,callback in _parallelCmdList:
-			# create thread
+		for cmd in _parallelCmdList:
+			# create thread for each command
 			# start thread
 			# join threads
 
@@ -71,8 +70,7 @@ def procTarget(IP,config):
 						target = _threadTarget,
 						kwargs = {
 							"ssh":ssh,
-							"cmd":cmd,
-							"callback":callback
+							"cmd":cmd
 						}
 					)
 			_threadList.append(thread)

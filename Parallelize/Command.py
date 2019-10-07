@@ -1,7 +1,11 @@
+def defaultCB(stdin,stdout,stderr):
+    for line in iter(lambda: stdout.readline(),""):
+        print(line)
+
 class Command(object):
-	def __init__(self,command,isThreaded,callBack=None):
+	def __init__(self,command,isThreaded=False,callBack=defaultCB):
 		self.command = command
-		self.isThreaded = True
+		self.isThreaded = isThreaded
 		self.callBack = callBack
 
 	def getCommand(self):
