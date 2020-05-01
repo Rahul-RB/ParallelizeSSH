@@ -6,7 +6,7 @@ Simple Parallel SSH module using Paramiko.
 - Python 3.6+
 
 ### Installation:
-Coming soon on pip
+pip install ParallelizeSSH
 
 ### Get Started:
 

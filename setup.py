@@ -5,7 +5,7 @@ import setuptools
 
 setuptools.setup(
     name="ParallelizeSSH",
-    version="0.0.1",
+    version="0.0.2",
     author="Rahul R Bharadwaj",
     description="Simple Parallel SSH based on Paramiko backend.",
     long_description="",
