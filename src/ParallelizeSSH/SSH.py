@@ -2,11 +2,11 @@ import json
 import multiprocessing
 import psutil
 
-from Parallelize.Targets import procTarget
-from Parallelize.Command import Command
-from Parallelize import config
+from ParallelizeSSH.Targets import procTarget
+from ParallelizeSSH.Command import Command
+from ParallelizeSSH import config
 
-class Parallelize(object):
+class SSH(object):
 	def __init__(self,hostConfig):
 		self.hostConfig = hostConfig
 		self._procList = []
@@ -90,7 +90,7 @@ class Parallelize(object):
 						# give up
 						for p in alive:
 							print("process {} survived SIGKILL; giving up".format(p))
-			
+
 			# Kill the parent first
 			proc.terminate()
 			gone, alive = psutil.wait_procs([proc], timeout=timeout, callback=onTerminate)

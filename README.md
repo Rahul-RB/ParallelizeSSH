@@ -11,8 +11,7 @@ Coming soon on pip
 ### Get Started:
 
     import os
-    from Parallelize.Parallelize import Command
-    from Parallelize.Parallelize import Parallelize
+    from ParallelizeSSH import SSH
      
     hosts = {
         "127.0.0.1":{
@@ -24,7 +23,7 @@ Coming soon on pip
         }
     }
      
-    ssh = Parallelize(hosts)
+    ssh = SSH(hosts)
     ssh.run(waitToExit=False)
     ssh.close()
 
@@ -32,8 +31,8 @@ Coming soon on pip
 
     import os
     import threading
-    from Parallelize.Parallelize import Command
-    from Parallelize.Parallelize import Parallelize
+    from ParallelizeSSH import Command
+    from ParallelizeSSH import SSH 
      
     def myCallback(stdin,stdout,stderr):
         print("In My Callback")
@@ -50,14 +49,14 @@ Coming soon on pip
         }
     }
      
-    ssh = Parallelize(hosts)
+    ssh = SSH(hosts)
     ssh.run(waitToExit=False)
     ssh.close()
 
 #### Using isThreaded for inifinitely running commands:
 
-    from Parallelize.Parallelize import Command
-    from Parallelize.Parallelize import Parallelize
+    from ParallelizeSSH import Command
+    from ParallelizeSSH import SSH 
        
     def lsCallback(stdin,stdout,stderr):
         for line in iter(lambda: stdout.readline(),""):
@@ -71,7 +70,7 @@ Coming soon on pip
         }
     }
      
-    ssh = Parallelize(hosts)
+    ssh = SSH(hosts)
     ssh.run(waitToExit=False)
     ssh.close()
 
@@ -94,12 +93,12 @@ Use the `partial` module of `functools` library to create partially binded funct
 ## Things to note:
 - Commands are processed in the order of the list. I.e. Command at index 0 is processed first.
 
-## Parallelize allows commands to be executed parallelly:
+## ParallelizeSSH allows commands to be executed parallelly:
 **Warning**: All parallelized commands are run at end. Use this option for commands which never end unless terminated by another program/user.
 
 To do so, use the `Command` class to create your command. Then set the `isThreaded` argument to `True`. Eg:
 
-    from Parallelize import Command
+    from ParallelizeSSH import Command
     parallelCmd1 = Command("./longRunningScript.sh",isThreaded=True)
     parallelCmd2 = Command("./anotherLongRunningScript.sh",isThreaded=True)
     

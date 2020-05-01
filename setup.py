@@ -4,10 +4,9 @@ import setuptools
 #    long_description = fh.read()
 
 setuptools.setup(
-    name="Parallelize",
+    name="ParallelizeSSH",
     version="0.0.1",
     author="Rahul R Bharadwaj",
-    author_email="spryion@gmail.com",
     description="Simple Parallel SSH based on Paramiko backend.",
     long_description="",
     long_description_content_type="text/markdown",
