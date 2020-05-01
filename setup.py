@@ -12,7 +12,8 @@ setuptools.setup(
     long_description="",
     long_description_content_type="text/markdown",
     url="https://github.com/Rahul-RB/paramiko-parallel-ssh",
-    packages=setuptools.find_packages(),
+    package_dir={'':'src'},
+    packages=setuptools.find_packages("src"),
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
