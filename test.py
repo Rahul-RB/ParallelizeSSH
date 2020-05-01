@@ -1,7 +1,7 @@
 import os
 import threading
-from Parallelize.Parallelize import Command
-from Parallelize.Parallelize import Parallelize
+from ParallelizeSSH import Command
+from ParallelizeSSH import SSH
 
 def closeConns(ssh):
 	ssh.close()
@@ -20,7 +20,7 @@ hosts = {
     }
 }
 
-ssh = Parallelize(hosts)
+ssh = SSH(hosts)
 ssh.run(waitToExit=False)
 t = threading.Timer(5,closeConns,kwargs={
 		"ssh":ssh
